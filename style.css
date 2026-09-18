@@ -1,0 +1,1861 @@
+
+/* ============================================================
+   McGILL CHEM-E CAR WEBSITE
+
+
+   This file summary:
+   This file controls the website's visual appearance, including
+   its typography, colors, page layouts, animations, navigation,
+   team cards, photo galleries, FAQ, news, and contact section.
+
+   The design is:
+   Black backgrounds with white text. Red accents for buttons, headings, and interactive elements.
+   Inter for general text and Orbitron for headings. Lastly, animated cars along the left and right sides of the page.
+
+   Incase of Maintenance
+   1. CSS rules are applied in order. Later rules can override
+      earlier rules when they have the same specificity.
+   2. JavaScript controls certain interactive elements by adding
+      or removing classes such as .active.
+   3. Image dimensions, spacing, and animations are defined here.
+      Changing them may affect the website's layout.
+   4. Keep the corresponding HTML class and ID names consistent
+      with the selectors in this file.
+
+   ============================================================ */
+
+
+/* ============================================================
+   1. GLOBAL STYLES
+   ============================================================
+
+   These rules establish the website's default stuff including
+   background colors, text colors, and page spacing.
+*/
+
+
+/*
+   Apply border box sizing to every element. With border-box, an element's declared width and height
+   include its padding and border, making layouts easier to manage.
+   Inter is the default font throughout the website!!
+*/
+*{
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+
+/*
+   Apply Orbitron to the main headings and folder elements.
+
+   This gives the website its futuristic, engineeringeque (idk if this is a word)
+   typography while keeping regular text in Inter.
+*/
+h1,h2,h3,.folder{
+    font-family:'Orbitron',sans-serif;
+}
+
+
+/*
+   Set the default appearance of the entire page.
+
+   background: Makes the page background black.
+   color: Makes text white unless another rule overrides it.
+   margin: Removes the browser's default outer spacing.
+   padding: Adds 80px of horizontal space on both sides.
+*/
+body{
+    background:black;
+    color:white;
+    margin:0;
+    padding:0 80px;
+}
+
+
+/* ============================================================
+   2. ANIMATED SIDE TRACKS
+   ============================================================
+
+   Two vertical tracks appear along the left and right edges
+   of the screen.
+
+   Animated car images travel along these tracks.
+
+   The tracks are fixed in place, so they remain visible
+   even when the visitor scrolls down the page.
+*/
+
+
+/*
+   Create the vertical dashed track.
+
+   position: fixed
+      Keeps the track attached to the browser viewport.
+
+   height: 100vh
+      Makes the track as tall as the visible screen.
+
+   repeating-linear-gradient
+      Creates the dashed white line pattern:
+      - 12px of white
+      - 24px of transparent space
+
+   z-index: 1
+      Places the track above the page background.
+*/
+.track{
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 6px;
+
+    background: repeating-linear-gradient(
+            to bottom,
+            white 0px,
+            white 12px,
+            transparent 12px,
+            transparent 36px
+    );
+
+    z-index:1;
+}
+
+
+/*
+   Position the left track against the left edge
+   of the browser window.
+*/
+.left{ left:0; }
+
+
+/*
+   Position the right track against the right edge
+   of the browser window.
+*/
+.right{ right:0; }
+
+
+/* ============================================================
+   3. LEFT CAR ANIMATION
+   ============================================================
+
+   The first car travels down the left side of the website.
+
+   Its movement is controlled by the driveDown animation.
+*/
+
+
+/*
+   Style and position the left car.
+
+   position: fixed
+      Keeps the car positioned relative to the viewport.
+
+   left: -60px
+      Moves part of the image outside the left edge.
+
+   transform
+      Rotates the image 90 degrees and flips it horizontally
+      to achieve the desired driving orientation.
+
+   transform-origin
+      Rotates the image around its center.
+
+   animation
+      Runs driveDown for 12 seconds in a continuous loop.
+
+   z-index: 50
+      Places the car above the tracks and most page elements.
+*/
+.car{
+    position: fixed;
+    left:-60px;
+    width:210px;
+
+    transform: rotate(90deg) scaleX(-1);
+    transform-origin:center;
+
+    animation: driveDown 12s linear infinite;
+    z-index:50;
+}
+
+
+/*
+   Animate the left car from above the screen to below it.
+
+   0%:
+      The car starts 120px above the viewport.
+
+   45%:
+      The car reaches the bottom of the viewport.
+
+   50% - 100%:
+      The car remains at the bottom until the animation
+      restarts.
+
+   This timing creates a pause before the next downward drive.
+*/
+@keyframes driveDown{
+    0%{ top:-120px; }
+    45%{ top:100vh; }
+    50%{ top:100vh; }
+    100%{ top:100vh; }
+}
+
+
+/* ============================================================
+   4. RIGHT CAR ANIMATION
+   ============================================================
+
+   The second car travels upward along the right side.
+
+   It uses a separate animation so the cars do not
+   move in the same direction or at the same time.
+*/
+
+
+/*
+   Style and position the right car.
+
+   right: -60px
+      Places part of the car outside the right edge.
+
+   top: 150vh
+      Initially positions the car below the visible screen.
+
+   transform
+      Rotates the car in the opposite direction from
+      the left car and flips the image horizontally.
+
+   animation
+      Runs driveUp continuously over 12 seconds.
+
+   z-index: 50
+      Keeps the car above the tracks and page background.
+*/
+.car2{
+    position: fixed;
+    right:-60px;
+    width:210px;
+
+    top:150vh;
+
+    transform: rotate(-90deg) scaleX(-1);
+    transform-origin:center;
+
+    animation: driveUp 12s linear infinite;
+    z-index:50;
+}
+
+
+/*
+   Animate the right car upward.
+
+   0% - 49%:
+      The car waits below the visible screen.
+
+   50%:
+      The car moves into position at the bottom of the screen.
+
+   100%:
+      The car reaches a position 120px above the viewport.
+
+   The delayed start helps coordinate the movement
+   of the two cars.
+*/
+@keyframes driveUp{
+    0%{ top:150vh; }
+    49%{ top:150vh; }
+    50%{ top:100vh; }
+    100%{ top:-120px; }
+}
+
+
+/* ============================================================
+   5. HEADER AND NAVIGATION
+   ============================================================
+
+   The header contains the website logo and navigation links.
+
+   Flexbox positions the logo and navigation at opposite
+   ends of the header.
+
+   Navigation links have a red underline that appears
+   on hover or when the link is active.
+*/
+
+
+/*
+   Arrange the header's contents horizontally.
+
+   display: flex
+      Places the logo and navigation in a row.
+
+   justify-content: space-between
+      Pushes the logo and navigation to opposite sides.
+
+   align-items: center
+      Vertically aligns the contents.
+
+   padding
+      Adds vertical spacing around the header.
+*/
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 0;
+}
+
+
+/*
+   Set the logo's text color to red.
+
+   A separate .logo img rule later in this file
+   controls the size of logo images.
+*/
+.logo{
+    color:red;
+}
+
+
+/*
+   Style navigation links.
+
+   margin-left
+      Creates spacing between neighboring links.
+
+   text-decoration: none
+      Removes the browser's default underline.
+
+   position: relative
+      Provides the positioning reference for the
+      animated underline created by ::after.
+*/
+nav a{
+    color:white;
+    margin-left:25px;
+    text-decoration:none;
+    position:relative;
+}
+
+
+/*
+   Create the animated underline beneath each link.
+
+   The underline is initially invisible because its
+   width is set to zero.
+
+   The transition gradually changes its width when
+   the link is hovered over or marked active.
+*/
+nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:2px;
+    background:red;
+    transition:.3s;
+}
+
+
+/*
+   Reveal the red underline when:
+
+   1. A visitor hovers over the navigation link.
+   2. The link has the .active class.
+
+   The .active class can be used to indicate the
+   currently selected page or section.
+*/
+nav a:hover::after,
+nav a.active::after{
+    width:100%;
+}
+
+
+/* ============================================================
+   6. HERO SECTION
+   ============================================================
+
+   The hero is the prominent introductory area of the website.
+
+   It includes the main heading, descriptive text, and
+   a featured image with an animated red glow.
+*/
+
+
+/*
+   Center the hero's text and move the section slightly
+   upward using a negative top margin.
+*/
+.hero{
+    text-align:center;
+    margin-top:-30px;
+}
+
+
+/*
+   Style descriptive paragraphs inside the hero.
+
+   line-height: 1.7
+      Adds vertical spacing between lines for readability.
+
+   color: #ddd
+      Uses a softer white for secondary text.
+*/
+.hero p{
+    margin-top:30px;
+    font-size:19px;
+    line-height:1.7;
+    color:#ddd;
+
+}
+
+
+/*
+   Create the glowing red heading style.
+
+   text-shadow applies two red shadows with different
+   blur distances and transparency levels.
+
+   Together, they create a soft neon-like glow.
+*/
+.glow{
+    color:#ff2b2b;
+    font-size:70px;
+    text-shadow:
+            0 0 8px rgba(255,0,0,0.5),
+            0 0 16px rgba(255,0,0,0.3);
+}
+
+
+/*
+   Style the container surrounding the hero image.
+
+   width: 800px
+      Sets the intended image-container width.
+
+   max-width: 90%
+      Prevents the container from exceeding 90%
+      of its available space.
+
+   padding and border-radius
+      Create spacing and rounded corners around the image.
+
+   animation
+      Continuously alternates between the two glow
+      states defined in heroGlow.
+*/
+.hero-img{
+    display:inline-block;
+    width:800px;
+    max-width:90%;
+    padding:6px;
+    border-radius:20px;
+    animation:heroGlow 2.5s ease-in-out infinite alternate;
+    margin:-20px auto 0;
+}
+
+
+/*
+   Ensure the image fits inside its container.
+
+   width: 100%
+      Makes the image fill the container's available width.
+
+   height: auto
+      Preserves the image's original aspect ratio.
+
+   display: block
+      Removes the default inline-image spacing.
+
+   border-radius
+      Rounds the image corners.
+*/
+.hero-img img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:16px;
+}
+
+
+/*
+   Animate the red glow around the hero image.
+
+   0%:
+      Display a smaller, softer red glow.
+
+   100%:
+      Display a larger, brighter glow.
+
+   The .hero-img animation alternates between these
+   two states to produce the pulsing effect.
+*/
+@keyframes heroGlow{
+    0%{
+        box-shadow:
+                0 0 15px rgba(255,0,0,0.6),
+                0 0 30px rgba(255,0,0,0.4),
+                0 0 60px rgba(255,0,0,0.25);
+    }
+
+    100%{
+        box-shadow:
+                0 0 30px rgba(255,0,0,0.9),
+                0 0 60px rgba(255,0,0,0.6),
+                0 0 90px rgba(255,0,0,0.35);
+    }
+}
+
+
+/* ============================================================
+   7. DEFAULT BUTTON STYLES
+   ============================================================
+
+   Provides the default appearance for HTML button elements.
+
+   More specific button classes can override these styles.
+*/
+
+
+/*
+   Create rounded red buttons with white text.
+
+   border: none
+      Removes the browser's default button border.
+
+   cursor: pointer
+      Displays the hand cursor when hovering.
+
+   margin and padding
+      Provide spacing around and inside the button.
+*/
+button{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:red;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+
+/* ============================================================
+   8. SECTION HEADINGS AND SUBTITLES
+   ============================================================
+
+   These styles are shared by multiple sections
+   throughout the website.
+*/
+
+
+/*
+   Style large section headings.
+
+   The slide animation causes the heading to fade in
+   and move upward when its animation starts.
+*/
+.section-title{
+    font-size:55px;
+    margin-top:110px;
+    margin-bottom:20px;
+    animation:slide 1s;
+}
+
+
+/*
+   Define the heading entrance animation.
+
+   from:
+      The heading is transparent and shifted down 40px.
+
+   to:
+      The heading is fully visible in its original position.
+*/
+@keyframes slide{
+    from{opacity:0;transform:translateY(40px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+
+/*
+   Display subtitles in a muted gray color so they
+   are visually distinct from primary headings.
+*/
+.subtitle{
+    color:#aaa;
+}
+
+
+/* ============================================================
+   9. FOLDER-STYLE ELEMENTS
+   ============================================================
+
+   Folder elements provide a visual way to organize
+   information into selectable categories.
+
+   Their border changes color when hovered over.
+*/
+
+
+/*
+   Style folder containers.
+
+   border and border-radius
+      Create a rounded rectangular outline.
+
+   cursor: pointer
+      Indicates that the folder can be clicked.
+
+   transition
+      Smoothly animates changes to supported properties,
+      including the border color.
+*/
+.folder{
+    border:1px solid #333;
+    padding:18px;
+    margin:20px 0;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:24px;
+    transition:.3s;
+}
+
+
+/*
+   Highlight a folder with a red border when hovered over.
+*/
+.folder:hover{
+    border-color:red;
+}
+
+
+/*
+   Style nested or secondary folder elements.
+
+   The left margin indents the element to visually
+   indicate that it belongs beneath another item.
+*/
+.sub{
+    margin-left:40px;
+    font-size:20px;
+}
+
+
+/* ============================================================
+   10. HORIZONTALLY SCROLLABLE CONTENT
+   ============================================================
+
+   The .content container is used to display items
+   side by side, such as team cards or gallery images.
+
+   Visitors can scroll horizontally when the content
+   extends beyond the available width.
+*/
+
+
+/*
+   Arrange child elements in a horizontal row.
+
+   display: flex
+      Places the children side by side.
+
+   gap: 30px
+      Adds spacing between items.
+
+   overflow-x: auto
+      Enables horizontal scrolling when needed.
+
+   overflow-y: hidden
+      Hides vertical overflow.
+
+   scroll-behavior: smooth
+      Makes programmatic scrolling animate smoothly.
+*/
+.content{
+    display:flex;
+    gap:30px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:20px 0;
+    scroll-behavior:smooth;
+}
+
+
+/* ============================================================
+   11. HORIZONTAL SCROLLBAR
+   ============================================================
+
+   Customize the appearance of the scrollbar used
+   by .content.
+
+   These selectors target browsers that support
+   the ::-webkit-scrollbar pseudo-elements.
+*/
+
+
+/*
+   Set the horizontal scrollbar's thickness to 6px.
+*/
+.content::-webkit-scrollbar{
+    height:6px;
+}
+
+
+/*
+   Style the scrollbar track, which is the background
+   behind the draggable scrollbar thumb.
+*/
+.content::-webkit-scrollbar-track{
+    background:#111;
+    border-radius:10px;
+}
+
+
+/*
+   Style the draggable scrollbar thumb.
+
+   The gray color makes it visible against
+   the dark track.
+*/
+.content::-webkit-scrollbar-thumb{
+    background:#555;
+    border-radius:10px;
+}
+
+
+/*
+   Change the scrollbar thumb to red when hovered over.
+*/
+.content::-webkit-scrollbar-thumb:hover{
+    background:red;
+}
+
+
+/* ============================================================
+   12. TEAM MEMBER CARDS
+   ============================================================
+
+   Team cards display individual team members.
+
+   Each card can contain an image, name, and
+   additional information.
+*/
+
+
+/*
+   Define the size and alignment of each card.
+
+   width: 230px
+      Sets a consistent card width.
+
+   flex: 0 0 auto
+      Prevents the card from growing or shrinking
+      inside a flex container.
+
+   This is particularly useful inside .content,
+   where the cards should scroll horizontally.
+*/
+.card{
+    width:230px;
+    flex:0 0 auto;
+    text-align:center;
+    cursor:pointer;
+}
+
+
+/*
+   Make team images fill the width of their cards.
+
+   border-radius
+      Creates rounded image corners.
+
+   transition
+      Smoothly animates the hover scaling effect.
+*/
+.card img{
+    width:100%;
+    border-radius:14px;
+    transition:.3s;
+}
+
+
+/*
+   Slightly enlarge a team member's image on hover.
+
+   This gives visitors visual feedback when they
+   move their cursor over a card image.
+*/
+.card img:hover{
+    transform:scale(1.05);
+}
+
+
+/* ============================================================
+   13. TEAM MEMBER NAMES
+   ============================================================ */
+
+
+/*
+   Display the team member's name beneath the image.
+
+   display: inline-block
+      Allows the red underline to follow the width
+      of the text rather than filling the entire card.
+
+   border-bottom
+      Creates the red underline.
+*/
+.name{
+    margin-top:12px;
+    font-size:22px;
+    border-bottom:2px solid red;
+    display:inline-block;
+    padding-bottom:3px;
+}
+
+
+/* ============================================================
+   14. TEAM MEMBER INFORMATION BOX
+   ============================================================ */
+
+
+/*
+   Style the information displayed beneath a team member.
+
+   The red border separates the information from
+   the rest of the card.
+
+   line-height provides additional space between
+   lines of text.
+
+   width: 100% makes the box fill its parent container.
+*/
+.info{
+    margin-top:12px;
+    padding:12px;
+    border:2px solid red;
+    border-radius:10px;
+    color:white;
+    font-size:15px;
+    line-height:1.5;
+    width:100%;
+}
+
+
+/* ============================================================
+   15. GALLERY IMAGES
+   ============================================================
+
+   These rules style images shown in the website's
+   photo gallery.
+*/
+
+
+/*
+   Set the gallery image width and rounded corners.
+
+   cursor: pointer
+      Indicates the image can be clicked.
+
+   transition
+      Smoothly animates the enlargement on hover.
+*/
+.gallery-img{
+    width:450px;
+    border-radius:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+
+/*
+   Enlarge gallery images slightly when hovered over.
+*/
+.gallery-img:hover{
+    transform:scale(1.05);
+}
+
+
+/* ============================================================
+   16. FULL-SCREEN IMAGE OVERLAY
+   ============================================================
+
+   The overlay is used to display an enlarged image
+   above the rest of the website.
+
+   JavaScript is responsible for showing or hiding
+   the overlay when visitors interact with images.
+*/
+
+
+/*
+   Create a full-screen overlay.
+
+   position: fixed
+      Keeps the overlay attached to the viewport.
+
+   inset: 0
+      Extends it to all four edges of the screen.
+
+   background
+      Adds a nearly opaque black background.
+
+   display: none
+      Keeps the overlay hidden by default.
+
+   justify-content and align-items
+      Center the displayed image when the overlay
+      uses a flex display.
+
+   z-index: 100
+      Places the overlay above the animated cars,
+      tracks, and other page elements.
+*/
+#overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:100;
+}
+
+
+/*
+   Limit the size of the enlarged image.
+
+   max-width and max-height
+      Prevent the image from occupying more than
+      80% of the available width or height.
+
+   border-radius
+      Adds rounded corners.
+*/
+#overlay img{
+    max-width:80%;
+    max-height:80%;
+    border-radius:20px;
+}
+
+
+/* ============================================================
+   17. JOIN BUTTON
+   ============================================================
+
+   This class styles the website's Join button or link.
+
+   Unlike the general button selector, .join-btn can
+   also style an anchor element used as a button.
+*/
+
+
+/*
+   Create a prominent red call-to-action button.
+
+   display: inline-block
+      Allows the element to behave like an inline
+      element while accepting block-style dimensions.
+
+   text-decoration: none
+      Removes the underline when the button is a link.
+
+   font-weight: 600
+      Makes the button text more prominent.
+
+   transition
+      Smoothly animates the hover effect.
+*/
+.join-btn{
+    display:inline-block;
+    margin-top:5px;
+    padding:14px 34px;
+    border-radius:30px;
+    background:red;
+    color:white;
+    font-size:18px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.25s;
+}
+
+
+/*
+   Slightly enlarge the Join button on hover.
+*/
+.join-btn:hover{
+    transform:scale(1.05);
+}
+
+
+/* ============================================================
+   18. HISTORY SECTION LAYOUT
+   ============================================================
+
+   The history section presents information about
+   McGill ChemE Car and its background.
+
+   Its layout combines written content and an image.
+*/
+
+
+/*
+   Limit the history section's width and center
+   it horizontally within the page.
+*/
+.history-section{
+    max-width:1100px;
+    margin:0 auto;
+}
+
+
+/*
+   Keep history text left-aligned and restrict
+   its maximum width for readability.
+*/
+.history-text{
+    text-align:left;
+    max-width:800px;
+}
+
+
+/*
+   Arrange the history text and image horizontally.
+
+   justify-content: space-between
+      Distributes the available space between them.
+
+   gap: 100px
+      Maintains spacing between the text and image.
+
+   align-items: center
+      Vertically aligns the two elements.
+*/
+.history-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:100px;
+    margin-top:20px;
+}
+
+
+/* ============================================================
+   19. HISTORY TEXT
+   ============================================================ */
+
+
+/*
+   Style individual history text blocks.
+
+   The font size, line height, and muted white color
+   keep longer paragraphs readable.
+
+   max-width prevents text lines from becoming
+   excessively long.
+*/
+.history-line{
+    font-size:19px;
+    line-height:1.7;
+    color:#ddd;
+    max-width:900px;
+    text-align:left;
+}
+
+
+/* ============================================================
+   20. HISTORY IMAGE
+   ============================================================ */
+
+
+/*
+   Style the image displayed in the history section.
+
+   width: 480px
+      Sets the image width.
+
+   border-radius
+      Rounds its corners.
+
+   box-shadow
+      Adds two red shadows to create a glowing
+      effect around the image.
+*/
+.history-image img{
+    width:480px;
+    border-radius:18px;
+    box-shadow:
+            0 0 20px rgba(255,0,0,0.5),
+            0 0 40px rgba(255,0,0,0.35);
+}
+
+
+/* ============================================================
+   21. STATISTICS SECTION
+   ============================================================
+
+   The statistics section displays important numbers
+   and their descriptions.
+
+   For example, it can present team achievements,
+   competition information, or historical milestones.
+*/
+
+
+/*
+   Arrange statistics horizontally using Flexbox.
+
+   justify-content: center
+      Centers the statistics within the section.
+
+   gap: 80px
+      Adds spacing between statistics.
+
+   flex-wrap: wrap
+      Allows statistics to move onto additional
+      rows when there is insufficient space.
+*/
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:80px;
+    margin-top:70px;
+    flex-wrap:wrap;
+}
+
+
+/*
+   Center the text within each individual statistic.
+*/
+.stat{
+    text-align:center;
+}
+
+
+/*
+   Style the large numerical heading in each statistic.
+
+   The red Orbitron text makes the number stand out.
+*/
+.stat h3{
+    font-size:70px;
+    color:red;
+    margin:0;
+    font-family:'Orbitron',sans-serif;
+}
+
+
+/*
+   Style the descriptive label beneath each statistic.
+
+   letter-spacing
+      Adds space between characters for a cleaner
+      visual appearance.
+*/
+.stat p{
+    margin-top:10px;
+    color:#ccc;
+    letter-spacing:1px;
+}
+
+
+/* ============================================================
+   22. COMPETITION SECTION
+   ============================================================
+
+   These styles control the heading and descriptive
+   text in the competition section.
+*/
+
+
+/*
+   Style the competition section heading.
+
+   The large top margin separates this section
+   from the content above it.
+*/
+.competition-title{
+    margin-top:100px;
+    font-size:38px;
+    color:white;
+}
+
+
+/*
+   Style the main competition description.
+
+   max-width
+      Keeps paragraphs at a readable width.
+
+   line-height
+      Adds vertical spacing between lines.
+*/
+.competition-text{
+    max-width:900px;
+    font-size:19px;
+    line-height:1.7;
+    color:#ddd;
+    margin-top:20px;
+}
+
+
+/*
+   Add spacing beneath individual paragraphs
+   inside the competition description.
+*/
+.competition-text p{
+    margin-bottom:18px;
+}
+
+
+/* ============================================================
+   23. LOGO IMAGE
+   ============================================================
+
+   This rule controls the size of images placed
+   inside elements with the .logo class.
+
+   It complements the earlier .logo rule, which
+   controls text color.
+
+   Both rules are intentionally preserved.
+*/
+
+
+/*
+   Set logo images to a height of 130px.
+
+   display: block
+      Removes the default inline-image spacing
+      beneath the image.
+*/
+.logo img{
+    height:130px;
+    display:block;
+}
+
+
+/* ============================================================
+   24. GALLERY LAYOUT AND TABS
+   ============================================================
+
+   The gallery uses a tab-based interface.
+
+   The layout contains:
+   - A column of selectable gallery tabs.
+   - A content area displaying the selected gallery.
+
+   JavaScript can manage the selected gallery by
+   adding or removing the .active class.
+*/
+
+
+/*
+   Arrange gallery tabs and gallery content side by side.
+
+   align-items: flex-start
+      Aligns both areas at the top.
+
+   gap: 60px
+      Creates space between the tabs and content.
+*/
+.gallery-layout{
+    display:flex;
+    gap:60px;
+    align-items:flex-start;
+    margin-top:40px;
+}
+
+
+/*
+   Arrange gallery tabs vertically.
+
+   flex-direction: column
+      Stacks the tabs from top to bottom.
+
+   min-width: 160px
+      Prevents the tab column from becoming
+      narrower than 160px.
+*/
+.gallery-tabs{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    min-width:160px;
+}
+
+
+/*
+   Style an individual gallery tab.
+
+   position: relative
+      Provides a positioning reference for the
+      animated underline created by ::after.
+
+   cursor: pointer
+      Indicates that the tab can be selected.
+*/
+.gallery-tab{
+    font-size:22px;
+    cursor:pointer;
+    position:relative;
+    padding-bottom:6px;
+    display:inline-block;
+}
+
+
+/*
+   Create the red underline beneath a gallery tab.
+
+   The underline is initially hidden because
+   its width is zero.
+
+   Its width changes smoothly when the tab
+   becomes active.
+*/
+.gallery-tab::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:3px;
+    background:red;
+    transition:.3s;
+}
+
+
+/*
+   Show the full red underline on the active tab.
+
+   JavaScript can add the .active class to indicate
+   which gallery category is currently selected.
+*/
+.gallery-tab.active::after{
+    width:100%;
+}
+
+
+/*
+   Hide gallery content by default.
+
+   display: none
+      Removes the content from the visible layout.
+
+   opacity: 0
+      Sets the initial transparency state.
+
+   transition
+      Defines a 0.35-second opacity transition.
+*/
+.gallery-content{
+    display:none;
+    opacity:0;
+    transition:opacity .35s ease;
+}
+
+
+/*
+   Display the currently selected gallery.
+
+   display: flex
+      Makes the gallery content visible and arranges
+      its children using Flexbox.
+
+   opacity: 1
+      Makes the selected content fully visible.
+*/
+.gallery-content.active{
+    display:flex;
+    opacity:1;
+}
+
+
+/* ============================================================
+   25. FREQUENTLY ASKED QUESTIONS (FAQ)
+   ============================================================
+
+   The FAQ section contains expandable questions
+   and answers.
+
+   JavaScript can toggle the .active class on each
+   .faq-item to expand or collapse its answer.
+*/
+
+
+/*
+   Add spacing around the FAQ section.
+
+   The horizontal padding is based on a percentage
+   of the section's containing block.
+*/
+#faq{
+    padding:120px 10%;
+}
+
+
+/*
+   Limit the width of the FAQ content and
+   center it horizontally.
+*/
+.faq-container{
+    max-width:900px;
+    margin:0 auto;
+}
+
+
+/*
+   Style an individual FAQ item.
+
+   border and border-radius
+      Create the rounded container.
+
+   margin-bottom
+      Separates one question from the next.
+
+   overflow: hidden
+      Keeps the expanding answer inside the
+      rounded container.
+*/
+.faq-item{
+    border:1px solid #333;
+    border-radius:12px;
+    margin-bottom:18px;
+    overflow:hidden;
+}
+
+
+/*
+   Style the clickable FAQ question.
+
+   width: 100%
+      Makes the question occupy the full
+      width of its FAQ item.
+
+   text-align: left
+      Keeps the text aligned to the left.
+
+   font-family: inherit
+      Uses the inherited font family.
+
+   font-style: italic
+      Gives the question italic styling.
+
+   cursor: pointer
+      Indicates that the question is interactive.
+
+   Note:
+   The global button rule also applies when
+   .faq-question is used on a button element.
+*/
+.faq-question{
+    width:100%;
+    text-align:left;
+    background:black;
+    color:white;
+    border:none;
+    padding:20px 25px;
+    font-size:20px;
+    cursor:pointer;
+    font-family:inherit;
+    font-style:italic;
+}
+
+
+/*
+   Slightly brighten the FAQ question's background
+   when the visitor hovers over it.
+*/
+.faq-question:hover{
+    background:#111;
+}
+
+
+/*
+   Hide FAQ answers by default.
+
+   max-height: 0
+      Collapses the answer vertically.
+
+   overflow: hidden
+      Prevents hidden text from showing outside
+      the collapsed answer container.
+
+   padding: 0 25px
+      Maintains horizontal spacing without
+      adding vertical space when collapsed.
+
+   transition
+      Smoothly animates changes to max-height
+      and padding.
+*/
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+    padding:0 25px;
+    color:#bbb;
+    font-size:19px;
+    line-height:1.7;
+    transition:max-height .35s ease, padding .35s ease;
+}
+
+
+/*
+   Expand the answer when its parent FAQ item
+   has the .active class.
+
+   max-height: 200px
+      Allows the answer container to expand
+      up to 200px in height.
+
+   padding
+      Adds vertical spacing around the answer.
+
+   MAINTENANCE NOTE:
+   Answers taller than 200px may be clipped because
+   the base .faq-answer rule uses overflow: hidden.
+
+   This behavior is part of the original styling
+   and has not been changed.
+*/
+.faq-item.active .faq-answer{
+    max-height:200px;
+    padding:20px 25px;
+}
+
+
+/* ============================================================
+   26. SHARED BODY TEXT
+   ============================================================
+
+   Use .body-text for general paragraphs that need
+   consistent formatting across the website.
+*/
+
+
+/*
+   Set the standard body-copy appearance.
+
+   The maximum width helps keep longer paragraphs
+   readable instead of stretching across the page.
+*/
+.body-text{
+    font-size:19px;
+    line-height:1.7;
+    color:#ddd;
+    max-width:900px;
+}
+
+
+/* ============================================================
+   27. HISTORY TEXT FORMATTING
+   ============================================================ */
+
+
+/*
+   Preserve whitespace and line breaks in the element
+   with the ID history-text.
+
+   white-space: pre-wrap
+      Keeps line breaks and repeated spaces while
+      still allowing text to wrap when necessary.
+
+   This is useful when history content contains
+   intentional formatting or line breaks.
+*/
+#history-text{
+    white-space: pre-wrap;
+}
+
+
+/* ============================================================
+   28. CONTACT SECTION
+   ============================================================
+
+   The contact section contains links to the team's
+   contact information and social platforms.
+
+   Its links include icons and animated hover effects.
+*/
+
+
+/*
+   Arrange contact links in a vertical column.
+
+   gap: 28px
+      Adds spacing between the links.
+
+   max-width: 500px
+      Limits the width of the contact-link container.
+*/
+.contact-links{
+    margin-top:50px;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+    font-size:22px;
+    max-width:500px;
+}
+
+
+/*
+   Arrange each contact icon beside its link text.
+
+   display: flex
+      Places the icon and text horizontally.
+
+   align-items: center
+      Vertically aligns the icon and text.
+
+   text-decoration: none
+      Removes the default underline.
+
+   transition
+      Smoothly animates the hover effect.
+*/
+.contact-links a{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    color:white;
+    text-decoration:none;
+    transition:.25s;
+}
+
+
+/*
+   Set consistent sizing and alignment for
+   icons inside the contact links.
+
+   The fixed width helps the text in different
+   contact links line up evenly.
+*/
+.contact-links i{
+    font-size:34px;
+    width:40px;
+    text-align:center;
+}
+
+
+/*
+   Highlight contact links on hover.
+
+   color: red
+      Changes the link text to red.
+
+   translateX(8px)
+      Moves the link slightly to the right.
+
+   text-shadow
+      Adds a two-layer red glow.
+
+   The transition defined in .contact-links a
+   makes these effects animate smoothly.
+*/
+.contact-links a:hover{
+    color:red;
+    transform:translateX(8px);
+    text-shadow:
+            0 0 6px rgba(255,0,0,0.6),
+            0 0 12px rgba(255,0,0,0.4);
+}
+
+
+/*
+   Style the overall contact section.
+
+   display: flex
+      Creates a flexible layout.
+
+   flex-direction: column
+      Stacks the contents vertically.
+
+   align-items: center
+      Centers the contents horizontally.
+
+   border-top
+      Adds a subtle dividing line above
+      the contact section.
+
+   padding
+      Adds space above and below the content.
+*/
+#contact{
+    padding:60px 0 120px 0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    border-top:1px solid #222;
+    margin-top:0;
+}
+
+
+/*
+   Style the logo displayed in the contact section.
+
+   width: 600px
+      Sets the logo width.
+
+   opacity: 0.9
+      Makes it slightly transparent.
+
+   filter: drop-shadow
+      Adds two red glow effects around the
+      visible shape of the logo.
+
+   Unlike box-shadow, drop-shadow follows the
+   shape of the image's visible pixels.
+*/
+.contact-logo{
+    width:600px;
+    margin-top:10px;
+    margin-bottom:40px;
+    opacity:0.9;
+
+    filter: drop-shadow(0 0 8px rgba(255,0,0,0.4))
+    drop-shadow(0 0 18px rgba(255,0,0,0.3));
+}
+
+
+/* ============================================================
+   29. NEWS SECTION
+   ============================================================
+
+   The news section presents updates and announcements.
+
+   Each news card contains an image, heading,
+   publication date, and optional link.
+
+   The current CSS displays only the first three
+   news cards.
+*/
+
+
+/*
+   Limit the width of the news section and
+   center it horizontally.
+
+   The vertical margin separates it from
+   surrounding content.
+*/
+.news-container{
+    max-width:1000px;
+    margin:40px auto;
+}
+
+
+/*
+   Style an individual news card.
+
+   display: flex
+      Arranges the image and text side by side.
+
+   gap: 30px
+      Adds spacing between the image and text.
+
+   background and border
+      Create a subtle dark card against the
+      black page background.
+
+   align-items: center
+      Vertically aligns the card's contents.
+*/
+.news-card{
+    display:flex;
+    gap:30px;
+    background:#0d0d0d;
+    border:1px solid #222;
+    border-radius:18px;
+    padding:25px;
+    align-items:center;
+}
+
+
+/*
+   Set a consistent width and rounded corners
+   for images inside news cards.
+*/
+.news-card img{
+    width:260px;
+    border-radius:12px;
+}
+
+
+/*
+   Style headings inside the text portion
+   of each news card.
+
+   margin: 0
+      Removes the browser's default heading margin.
+*/
+.news-text h3{
+    margin:0;
+    font-size:26px;
+}
+
+
+/*
+   Display the news publication date in gray.
+
+   The vertical margins create spacing between
+   the date and surrounding text.
+*/
+.news-date{
+    color:#999;
+    margin:8px 0 12px 0;
+}
+
+
+/*
+   Style links inside news cards.
+
+   The red color makes links stand out,
+   while the heavier font weight provides emphasis.
+*/
+.news-link{
+    color:red;
+    text-decoration:none;
+    font-weight:600;
+}
+
+
+/*
+   Underline news links when hovered over,
+   indicating that they can be clicked.
+*/
+.news-link:hover{
+    text-decoration:underline;
+}
+
+
+/*
+   Hide every news card starting with the fourth.
+
+   :nth-child(n+4)
+      Selects the fourth child and all subsequent
+      children that match .news-card.
+
+   display: none
+      Removes those cards from the visible layout.
+
+   MAINTENANCE NOTE:
+   This selector counts child positions within the
+   parent, not just the number of .news-card elements.
+
+   If you add additional news cards, they may remain
+   hidden unless this rule is updated or overridden.
+
+   The original behavior has been preserved.
+*/
+.news-card:nth-child(n+4){
+    display:none;
+}
+
+

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chem-E Car</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="track left"></div>
+<div class="track right"></div>
+
+<!-- CAR -->
+<svg class="car" viewBox="0 0 220 110">
+    <rect x="40" y="55" width="120" height="35" rx="12" fill="#ff3a3a"/>
+    <polygon points="80,55 105,35 135,35 160,55" fill="#ff3a3a"/>
+    <polygon points="105,38 132,38 148,55 88,55" fill="#9fd8ff"/>
+    <line x1="105" y1="55" x2="105" y2="90" stroke="#cc2a2a" stroke-width="3"/>
+    <rect x="112" y="68" width="12" height="4" rx="2" fill="#d9d9d9"/>
+    <circle cx="160" cy="70" r="6" fill="#fff2a8"/>
+    <rect x="40" y="66" width="6" height="8" rx="2" fill="#ffb3b3"/>
+    <circle cx="75" cy="95" r="14" fill="black"/>
+    <circle cx="140" cy="95" r="14" fill="black"/>
+    <circle cx="75" cy="95" r="6" fill="#bfbfbf"/>
+    <circle cx="140" cy="95" r="6" fill="#bfbfbf"/>
+</svg>
+
+<svg class="car2" viewBox="0 0 220 110">
+    <rect x="40" y="55" width="120" height="35" rx="12" fill="#ff3a3a"/>
+    <polygon points="80,55 105,35 135,35 160,55" fill="#ff3a3a"/>
+    <polygon points="105,38 132,38 148,55 88,55" fill="#9fd8ff"/>
+    <line x1="105" y1="55" x2="105" y2="90" stroke="#cc2a2a" stroke-width="3"/>
+    <rect x="112" y="68" width="12" height="4" rx="2" fill="#d9d9d9"/>
+    <circle cx="160" cy="70" r="6" fill="#fff2a8"/>
+    <rect x="40" y="66" width="6" height="8" rx="2" fill="#ffb3b3"/>
+    <circle cx="75" cy="95" r="14" fill="black"/>
+    <circle cx="140" cy="95" r="14" fill="black"/>
+    <circle cx="75" cy="95" r="6" fill="#bfbfbf"/>
+    <circle cx="140" cy="95" r="6" fill="#bfbfbf"/>
+</svg>
+
+<header>
+    <div class="logo">
+        <img src="Logos/2026_logo_white.jpg" alt="McGill Chem-E-Car Logo">
+    </div>
+
+    <nav>
+        <a class="active" href="#main">Main</a>
+        <a href="#history">History</a>
+        <a href="#team">Team</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#news">News</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="main" class="hero">
+
+    <h2 class="glow">Chem-E Car</h2>
+
+    <div class="hero-img">
+        <img src="Group/Team2016.JPG" alt="Chem-E Car Team">
+    </div>
+
+    <p>McGill's Chem-E-Car Design Team builds chemically powered vehicles for competition.</p>
+
+    <a class="join-btn" href="https://forms.gle/5wS1DrarxQ5GX4U4A" target="_blank">
+        Join the Team
+    </a>
+
+</section>
+
+<section id="history">
+
+    <h2 class="section-title">History</h2>
+
+    <div class="history-top">
+
+        <div class="history-text">
+
+            <p id="history-text" class="history-line">McGill Chem-E-Car was founded in 2013 and has grown from 13 members to over 100 active students working across multiple engineering disciplines to design chemically powered cars for international competitions.  Over the years the team has built a strong culture of collaboration and hands-on engineering experience. Students work together across chemical, mechanical, electrical, and software disciplines to design and refine every aspect of the car!
+            </p>
+
+        </div>
+
+        <div class="history-image">
+            <img src="Group/GroupPhoto.jpg">
+        </div>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <h3 class="counter" data-target="1">0</h3>
+            <p>World Champion</p>
+        </div>
+
+        <div class="stat">
+            <h3 class="counter" data-target="3">0</h3>
+            <p>Regional Wins</p>
+        </div>
+
+        <div class="stat">
+            <h3 class="counter" data-target="108">0</h3>
+            <p>Team Members</p>
+        </div>
+
+        <div class="stat">
+            <h3 class="counter" data-target="5">0</h3>
+            <p>Subteams</p>
+        </div>
+
+        <div class="stat">
+            <h3 class="counter" data-target="11">0</h3>
+            <p>Departments</p>
+        </div>
+
+    </div>
+
+
+    <h3 class="competition-title">Chem-E Car Competition</h3>
+
+    <div class="body-text">
+
+        <p>
+            The AIChE Chem-E Car Competition is an undergraduate engineering design challenge hosted by the American Institute of Chemical Engineers (AIChE) during their annual regional and national conferences.
+            Teams design and build small cars powered and stopped entirely by chemical reactions. According to competition rules, the car must fit inside a <b>40 cm × 30 cm × 20 cm</b> box and travel a distance between <b>10–30 meters</b>.
+        </p>
+
+        <p>
+            This academic year the team aims to compete at the <b>2026 Regional Competition</b> in the spring and qualify for the <b>2026 National Competition</b> in November.
+        </p>
+
+    </div>
+
+</section>
+
+<section id="team">
+
+    <h2 class="section-title">Team</h2>
+    <div class="folder" onclick="toggle(this)">Executives</div>
+
+    <div class="content">
+
+        <div class="card" onclick="openImg(this)">
+
+            <img src="TeamPhotos/Ruya.jpg">
+
+            <h3 class="name">Rüya Nur Taș</h3>
+            <p class="info">
+                U3 Chemical Engineering<br>
+                Management Co-Captain<br>
+                Car Choice: RB19
+            </p>
+        </div>
+
+        <div class="card" onclick="openImg(this)">
+
+            <img src="TeamPhotos/Yoanna.jpg">
+
+            <h3 class="name">Yoana Nikolova</h3>
+            <p class="info">
+                U3 Chemical Engineering<br>
+                Technical Co-Captain<br>
+                Car Choice: TBD
+            </p>
+        </div>
+
+        <div class="card" onclick="openImg(this)">
+
+            <img src="TeamPhotos/Kennedy.jpg">
+
+            <h3 class="name">Kennedy Shalit</h3>
+            <p class="info">
+                U4 Chemical Engineering<br>
+                Technical Co-Captain<br>
+                Car Choice: Pink Mary Kay
+            </p>
+        </div>
+
+        <div class="card" onclick="openImg(this)">
+            <img src="TeamPhotos/Emma.jpg">
+
+            <h3 class="name">Emma Li</h3>
+            <p class="info">
+                U3 Chemical Engineering<br>
+                Power Source 1 Lead<br>
+                Car Choice: TBD
+            </p>
+        </div>
+
+        <div class="card" onclick="openImg(this)">
+            <img src="TeamPhotos/Lambert.jpg">
+
+            <h3 class="name">Lambert Zhang</h3>
+            <p class="info">
+                U3 Chemical Engineering<br>
+                Power Source 2 Lead<br>
+                Car Choice: TBD
+            </p>
+        </div>
+
+        <div class="card" onclick="openImg(this)">
+            <img src="TeamPhotos/Sam.jpg">
+
+            <h3 class="name">Sam Hyatt</h3>
+            <p class="info">
+                U2 Chemical Engineering<br>
+                Stopping-Mech Lead<br>
+                Car Choice: TBD
+            </p>
+        </div>
+
+        <div class="card" onclick="openImg(this)">
+            <img src="TeamPhotos/Mayara.jpg">
+            <h3 class="name">Mayara Gasmi</h3>
+            <p class="info">
+                U2 Chemical Engineering<br>
+                Media Officer<br>
+                Car Choice: TBD
+            </p>
+
+        </div>
+
+        <div class="card" onclick="openImg(this)">
+
+            <img src="TeamPhotos/Chris.jpg">
+
+            <h3 class="name">Christopher Boa</h3>
+            <p class="info">
+                U3 Chemical Engineering<br>
+                Safety Officer<br>
+                Car Choice: 2010 Honda
+            </p>
+        </div>
+
+        <div class="card" onclick="openImg(this)">
+            <img src="TeamPhotos/Andra.jpg">
+            <h3 class="name">Andra Scripcariu</h3>
+            <p class="info">
+                U3 Chemical Engineering<br>
+                Financial Officer<br>
+                Car Choice: Beetle 2000
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="gallery">
+
+    <h2 class="section-title">Gallery</h2>
+
+    <div class="folder" onclick="toggle(this)">2025–2026</div>
+
+    <div class="gallery-layout">
+
+        <!-- TABS -->
+        <div class="gallery-tabs">
+            <span class="gallery-tab active" onclick="setGalleryTab('events', this)">Team Events</span>
+            <span class="gallery-tab" onclick="setGalleryTab('competitions', this)">Competitions</span>
+        </div>
+
+        <!-- TEAM EVENTS -->
+        <div id="events" class="content gallery-content active">
+
+            <div class="card" onclick="openImg(this)">
+                <img src="Group/Pic2.jpeg" class="gallery-img">
+            </div>
+
+        </div>
+
+        <!-- COMPETITIONS -->
+        <div id="competitions" class="content gallery-content">
+
+            <div class="card" onclick="openImg(this)">
+                <img src="Group/Pic1.jpeg" class="gallery-img">
+            </div>
+
+            <div class="card" onclick="openImg(this)">
+                <img src="Group/T3.jpeg" class="gallery-img">
+            </div>
+
+            <div class="card" onclick="openImg(this)">
+                <img src="Group/T1.jpeg" class="gallery-img">
+            </div>
+
+            <div class="card" onclick="openImg(this)">
+                <img src="Group/T2.jpeg" class="gallery-img">
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="news">
+
+        <h2 class="section-title">Latest News</h2>
+
+        <div class="news-container">
+
+            <div class="news-card">
+
+                <img src="News/mcgill24.jpg">
+
+                <div class="news-text">
+                    <h3>McGill24 Fundraising Day!</h3>
+
+                    <p class="news-date">March 11, 2026</p>
+
+                    <p>
+                        Chem-E-Car is excited to participate in McGill24! Donations help our team
+                        prepare for competitions and cover important costs such as materials,
+                        testing, and travel.
+                    </p>
+
+                    <a href="https://lnkd.in/ebmAynRZ" target="_blank" class="news-link">
+                        Learn more
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+<section id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+
+        <div class="faq-container">
+
+            <div class="faq-item">
+                <button class="faq-question">Do I need experience to apply?</button>
+                <div class="faq-answer">
+                    Chem-E-Car accepts people of all experience levels. We have amazing team leads who teach you and guide you through everything you need to know.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">How long does the decision take?</button>
+                <div class="faq-answer">
+                    Recruitment decisions are typically made within a few weeks after applications close.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">What are the perks of being on the team?</button>
+                <div class="faq-answer">
+                    Being on Chem-E-Car gives you hands-on engineering experience while working with an amazing community of students across multiple disciplines.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">What if I want to join but I am not in Chemical Engineering?</button>
+                <div class="faq-answer">
+                    That's completely okay! Many of our members come from software, electrical, computer, and other engineering backgrounds. All disciplines collaborate to build the car.
+                </div>
+            </div>
+
+        </div>
+
+</section>
+
+
+<section id="contact">
+
+    <h2 class="section-title">Contact</h2>
+
+    <img class="contact-logo" src="Group/GroupPhoto2.jpg" alt="Chem-E-Car Logo">
+
+    <div class="contact-links">
+
+        <a href="chemecar@mcgilleus.ca">
+            <i class="fa-solid fa-envelope"></i>
+            <span>chemecar@mcgilleus.ca</span>
+        </a>
+
+        <a href="https://www.linkedin.com/company/mcgill-chem-e-car" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+            <span>Chem-E-Car</span>
+        </a>
+
+        <a href="https://www.instagram.com/mcgill.chemecar/" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+            <span>@mcgill.chemecar</span>
+        </a>
+
+    </div>
+
+</section>
+
+<div id="overlay" onclick="closeImg()">
+    <img id="big">
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
